@@ -143,6 +143,7 @@ const createHome = (id='') => {
     "mb-10",
   ]);
   let divUserId=createElement('div',['px-4','py-2','rounded-md','bg-purple-700','text-white','w-[25%]','ml-6','my-2'],`Your User Id is :${id}`)
+  divUserId.id='idUser'
   let addBtn = createElement(
     "button",
     [
@@ -297,6 +298,13 @@ const AddBlogModel = () => {
       document.querySelectorAll("form [name]").forEach((input) => {
         post[input.name.trim()] = input.value;
       });
+      let postUserId=document.getElementById('idUser').innerText.split(':')[1].trim()
+      console.log(typeof(postUserId))
+      console.log(post.id)
+      if(post["userId"]!=parseInt(postUserId)){
+        alert('Enter you user Id')
+        return
+      }
       console.log(post)
       createPost(post)
       BigDiv.classList.add("hidden");
