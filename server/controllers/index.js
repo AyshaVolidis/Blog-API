@@ -69,12 +69,10 @@ const getPostsbyUserId=(req,res)=>{
 const createUser=(req,res)=>{
     try{
         let user=req.body
-        console.log(user)
         if(Object.keys(user).length===0)throw new TypeError('Enter vaild user')
         if(!user.hasOwnProperty('id')){
             user={id:users.length+1,...user}
         }
-        console.log(user)
         let keysArr=['id','firstname','secondname','password']
         keysArr.forEach((k)=>{
             if(!user.hasOwnProperty(k))throw new TypeError('Enter vaild user with data id,firstname,secondname,password')
@@ -91,7 +89,6 @@ const createUser=(req,res)=>{
 const createPost=(req,res)=>{
     try{
         let post=req.body
-        console.log(post)
         if(Object.keys(post).length===0)throw new TypeError('Enter vaild post')
         let keysArr=['userId','title','content']
         keysArr.forEach((k)=>{
