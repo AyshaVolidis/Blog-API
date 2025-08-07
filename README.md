@@ -3,9 +3,11 @@
 A full-stack blogging platform where users can log into their accounts, view posts shared by others, add their own blog posts, and search for other users' posts using their user ID.
 
 🚀 Live Demo
+
 🔗 Visit the live site :https://blog-app-86el.onrender.com/
 
 ✨ Features
+
 🔐 User Login: Simple login system using user ID.
 
 📝 Post Creation: Users can create and submit their own blog posts.
@@ -17,6 +19,7 @@ A full-stack blogging platform where users can log into their accounts, view pos
 🧭 Clean UI: Responsive and user-friendly interface built with modern HTML/CSS/JS.
 
 🛠️ Tech Stack
+
 Frontend: HTML, CSS, JavaScript (Vanilla)
 
 Backend: Node.js, Express.js
@@ -24,6 +27,7 @@ Backend: Node.js, Express.js
 Deployment: Render.com
 
 📦 Installation (for local development)
+
 bash
 نسخ
 تحرير
@@ -67,4 +71,5 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 🧑‍💻 Author
 Aysha Volidis
-🌍 Live Project
+
+🌍 [Live Project](https://blog-app-86el.onrender.com/)
