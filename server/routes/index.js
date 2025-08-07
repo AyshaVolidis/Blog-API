@@ -2,7 +2,9 @@ const express=require('express')
 const {Router}=express
 const router=Router()
 
-const{getPosts,getPostsbyUserId,createUser,createPost}=require('../controllers')
+const{getPosts,getPostsbyUserId,createUser,createPost,getHomePage}=require('../controllers')
+
+router.get('/',getHomePage)
 
 router.get('/posts',getPosts)
 
