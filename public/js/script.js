@@ -453,7 +453,7 @@ const createUser=(user)=>{
     getPosts()
     document.getElementById('LoginModel').classList.add('hidden')
     appendToParent(app, [createHome(user.id), divCards]);
-    alert('done')
+    alert(`Welcome ${user.firstname+' '+user.secondname}`)
   })
   .catch(err=>{
     alert(err.message)

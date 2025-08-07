@@ -5,6 +5,7 @@
   },
   "scripts": {
     "dev": "nodemon ./server/",
+    "start": "node ./server/index.js",
     "test":"jest"
   },
   "devDependencies": {
