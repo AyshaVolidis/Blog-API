@@ -10,12 +10,12 @@ describe("test Blog-API", () => {
         .expect("Content-Type", /json/)
         .end((err, res) => {
           if (err) return done(err);
-          expect(res.body[0]).toHaveProperty("userId");
-          expect(res.body[0]).toHaveProperty("title");
-          expect(res.body[0]).toHaveProperty("content");
-          expect(typeof res.body[0]).toBe("object");
-          expect(res.body.length).toBeGreaterThan(0);
-          expect(Array.isArray(res.body)).toBe(true);
+          expect(res.body.posts[0]).toHaveProperty("userId");
+          expect(res.body.posts[0]).toHaveProperty("title");
+          expect(res.body.posts[0]).toHaveProperty("content");
+          expect(typeof res.body.posts[0]).toBe("object");
+          expect(res.body.posts.length).toBeGreaterThan(0);
+          expect(Array.isArray(res.body.posts)).toBe(true);
           done();
         });
     });
@@ -27,9 +27,9 @@ describe("test Blog-API", () => {
         .expect("Content-Type", /json/)
         .end((err, res) => {
           if (err) return done(err);
-          expect(Array.isArray(res.body)).toBe(true);
-          expect(res.body[0]).toHaveProperty("userId");
-          expect(res.body[0].userId).toBe(1);
+          expect(Array.isArray(res.body.posts)).toBe(true);
+          expect(res.body.posts[0]).toHaveProperty("userId");
+          expect(res.body.posts[0].userId).toBe(1);
           done();
         });
     });
@@ -75,10 +75,10 @@ describe("test Blog-API", () => {
       request(app)
         .get("/posts/user/0")
         .expect(404)
-        .expect("Content-Type", /text/)
+        .expect("Content-Type", /json/)
         .end((err, res) => {
           if (err) return done(err);
-          expect(res.text).toBe('User 0 Not Fount')
+          expect(res.body.message).toBe('User 0 Not Fount')
           done();
         });
     });
@@ -93,11 +93,11 @@ describe("test Blog-API", () => {
             secondname: "volidis",
             password: "aysha22"
         })
-        .expect("Content-Type", /text/)
+        .expect("Content-Type", /json/)
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          expect(res.text).toBe("There is user has this id ,Enter anthor one");
+          expect(res.body.message).toBe("There is user has this id ,Enter anthor one");
           done();
         });
     });
@@ -110,11 +110,11 @@ describe("test Blog-API", () => {
           firstname: "aysha",
           password: "aysha22",
         })
-        .expect("Content-Type", /text/)
+        .expect("Content-Type", /json/)
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          expect(res.text).toBe('Enter vaild user with data id,firstname,secondname,password');
+          expect(res.body.message).toBe('Enter vaild user with data id,firstname,secondname,password');
           done();
         });
     });
@@ -123,11 +123,11 @@ describe("test Blog-API", () => {
       request(app)
         .post("/users")
         .send({})
-        .expect("Content-Type", /text/)
+        .expect("Content-Type", /json/)
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          expect(res.text).toBe('Enter vaild user');
+          expect(res.body.message).toBe('Enter vaild user');
           done();
         });
     });
@@ -136,11 +136,11 @@ describe("test Blog-API", () => {
       request(app)
         .post("/posts")
         .send({})
-        .expect("Content-Type", /text/)
+        .expect("Content-Type", /json/)
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          expect(res.text).toBe('Enter vaild post');
+          expect(res.body.message).toBe('Enter vaild post');
           done();
         });
     });
@@ -153,11 +153,11 @@ describe("test Blog-API", () => {
             title: "My First Post",
             content: "This is the content of my very first post. Hello world!"
         })
-        .expect("Content-Type", /text/)
+        .expect("Content-Type", /json/)
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          expect(res.text).toBe("No User has this Id ,Enter vaild id");
+          expect(res.body.message).toBe("No User has this Id ,Enter vaild id");
           done();
         });
     });
@@ -169,11 +169,11 @@ describe("test Blog-API", () => {
             userId: 5,
             content: "This is the content of my very first post. Hello world!"
         })
-        .expect("Content-Type", /text/)
+        .expect("Content-Type", /json/)
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          expect(res.text).toBe('Enter vaild post with data userId,title,content');
+          expect(res.body.message).toBe('Enter vaild post with data userId,title,content');
           done();
         });
     });

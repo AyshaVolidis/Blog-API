@@ -44,9 +44,9 @@ const getPosts=(req,res)=>{
             let userPost=users.find(u=>u.id==post.userId)
             return {...post,userName:userPost.firstname+' '+userPost.secondname}
         })
-        res.status(200).json(myposts)
+        res.status(200).json({message:'posts return successfully',posts:myposts})
     }catch(err){
-        res.status(404).send('posts not found')
+        res.status(404).send({message:err.message})
     }
 }
 
@@ -58,10 +58,10 @@ const getPostsbyUserId=(req,res)=>{
             let userPost=users.find(u=>u.id==post.userId)
             return {...post,userName:userPost.firstname+' '+userPost.secondname}
         })
-        res.status(200).json(userPosts)
+        res.status(200).json({message:'posts return successfully',posts:userPosts})
 
     }catch(err){
-        res.status(404).send(err.message)
+        res.status(404).send({message:err.message})
     }
 }
 
@@ -79,10 +79,10 @@ const createUser=(req,res)=>{
         })
         if(users.some(u=>u.id==user.id))throw new TypeError("There is user has this id ,Enter anthor one")
         users.push(user)
-        res.status(201).send(user)
+        res.status(201).send({message:'user created successfully',user:user})
 
     }catch(err){
-        res.status(400).send(err.message)
+        res.status(400).send({message:err.message})
     }
 }
 
@@ -96,9 +96,9 @@ const createPost=(req,res)=>{
         })
         if(!users.some(u=>u.id==post.userId))throw new TypeError("No User has this Id ,Enter vaild id")
         posts.push(post)
-        res.status(201).send(post)
+        res.status(201).send({message:'post created successfully',post:post})
     }catch(err){
-        res.status(400).send(err.message)
+        res.status(400).send({message:err.message})
     }
 }
 
