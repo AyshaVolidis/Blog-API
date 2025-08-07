@@ -380,8 +380,7 @@ const getPosts = () => {
   fetch(`/posts`)
     .then((res) => res.json())
     .then((data) => {
-      console.log("Posts:", data);
-      const cards = data.map(createCard);
+      const cards = data.posts.map(createCard);
       appendToParent(divCards, cards);
     })
     .catch((err) => {
@@ -392,18 +391,16 @@ const getPosts = () => {
 const getPostsbyUserId = (id) => {
   divCards.innerHTML = "";
   fetch(`/posts/user/${id}`)
-    .then((res) => res.json())
+    .then((res) => {
+      if(!res.ok) return res.json().then(err=>{throw new TypeError(err.message)})
+      return res.json()
+    })
     .then((data) => {
-      console.log("Posts:", data);
-      const cards = data.map(createCard);
+      const cards = data.posts.map(createCard);
       appendToParent(divCards, cards);
     })
     .catch((err) => {
       console.error("Error fetching posts:", err.message);
-      const extractedMessage = err.message.match(/"([^"]+)"/);
-      const messageToShow = extractedMessage
-        ? extractedMessage[1]
-        : err.message;
       let divError = createElement(
         "div",
         [
@@ -417,7 +414,7 @@ const getPostsbyUserId = (id) => {
           "p-4",
           "mb-4",
         ],
-        messageToShow
+        err.message
       );
       appendToParent(divCards, [divError]);
     });
@@ -457,11 +454,11 @@ const createUser=(user)=>{
     if(!response.ok)throw new TypeError('Can not add this user')
     return response.json()
   })
-  .then((user)=>{
+  .then((data)=>{
     getPosts()
     document.getElementById('LoginModel').classList.add('hidden')
-    appendToParent(app, [createHome(user.id), divCards]);
-    alert(`Welcome ${user.firstname+' '+user.secondname}`)
+    appendToParent(app, [createHome(data.user.id), divCards]);
+    alert(`Welcome ${data.user.firstname+' '+data.user.secondname}`)
   })
   .catch(err=>{
     alert(err.message)
