@@ -30,7 +30,7 @@ Deployment: Render.com
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/AyshaVolidis/Blog-API.git
 
 # 2. Navigate into the project directory
 cd your-repo-name
@@ -41,6 +41,7 @@ npm install
 # 4. Start the server
 node server.js
 Then open your browser and go to http://localhost:3000
+```
 
 🧠 How It Works
 The user enters their ID to log in.
